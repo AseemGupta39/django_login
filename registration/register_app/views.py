@@ -17,25 +17,25 @@ def signup_page(request):
           password =  data.get('password')
           print("\n\n\n\n",first_name,last_name,user_name,password,"\n\n\n\n")
 
-        #   user = User.objects.filter(username=user_name)
+          user = User.objects.filter(username=user_name)
           
-        #   if user.exists():
-        #     #    messages.error(request, "username already exist.")  
-        #        return redirect('/register/')
+          if user.exists():
+               print("user exist")
+            #    messages.error(request, "username already exist.")  
+               return redirect('/register/')
 
-        #   print("\n\n\n\n",first_name,last_name,username,password,"\n\n\n\n")
 
-        #   user = User.objects.create(
-        #        first_name=first_name,
-        #        last_name=last_name,
-        #        username=username,
-        #        email = email
-        #   )
+          user = User.objects.create(
+               first_name=first_name,
+               last_name=last_name,
+               username=user_name,
+               email = email
+          )
           
-        #   user.set_password(password)
-        #   user.save()
-        # #   messages.success(request, "account registerd.")
-        #   return redirect("register_app/login_page/") 
+          user.set_password(password)
+          user.save()
+        #   messages.success(request, "account registerd.")
+          return redirect("register_app/login_page/") 
     return render(request,'register_app/signup.html')
 
 def login_page(request):
