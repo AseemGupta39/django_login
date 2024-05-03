@@ -8,11 +8,19 @@
   </head>
   <body>
     <h1>Login Page</h1>
+    {% if messages %}
+        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+            {% for message in messages %}
+            {{ message }}
+            {% endfor %}
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+          </div>
+          {% endif %}
     <form method="post">
         {%csrf_token%}
 
 
-          <div class="mb-3 username">
+          <div class="mb-3">
             <label for="exampleInputEmail1" class="form-label">User Name</label>
             <input type="text" required name = "user_name" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
           </div>

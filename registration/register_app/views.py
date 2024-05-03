@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect,HttpResponse
 from django.contrib.auth.models import User
+from django.contrib import messages
 from django.contrib.auth import authenticate,login,logout
 from django.contrib.auth.decorators import login_required
 
@@ -21,6 +22,7 @@ def signup_page(request):
         
         if user.exists():
             print("user exist")  
+            messages.error(request,"user already exist")
             # return HttpResponse("user already exist")
             return redirect('signup')
             # return render(request,'register_app/signup.html')
@@ -35,7 +37,7 @@ def signup_page(request):
         
         user.set_password(password)
         user.save()
-        #   messages.success(request, "account registerd.")
+        messages.success(request, "account created successfully.")
         return redirect('login_page')
     return render(request,'register_app/signup.html')
 
@@ -53,8 +55,9 @@ def login_page(request):
 
             # return redirect('home_page')
         else:
-             print("\n\nusername or password is incorrect\n\n")
-             return redirect('login_page')
+            print("\n\nusername or password is incorrect\n\n")
+            messages.error(request,"username or password is incorrect")
+            return redirect('login_page')
             # return HttpResponse("username or password is incorrect")
     return render(request,'register_app/login.html')
 
