@@ -16,12 +16,12 @@ def signup_page(request):
         user_name =  data.get('user_name')
         email = data.get('email')
         password =  data.get('password')
-        print("\n\n\n\n",first_name,last_name,user_name,password,"\n\n\n\n")
+        # print("\n\n\n\n",first_name,last_name,user_name,password,"\n\n\n\n")
 
         user = User.objects.filter(username=user_name)
         
         if user.exists():
-            print("user exist")  
+            # print("user exist")  
             messages.error(request,"user already exist")
             # return HttpResponse("user already exist")
             return redirect('signup')
@@ -55,12 +55,13 @@ def login_page(request):
 
             # return redirect('home_page')
         else:
-            print("\n\nusername or password is incorrect\n\n")
+            # print("\n\nusername or password is incorrect\n\n")
             messages.error(request,"username or password is incorrect")
             return redirect('login_page')
             # return HttpResponse("username or password is incorrect")
     return render(request,'register_app/login.html')
 
 def logout_page(request):
+    messages.success(request,"succesfully logout")
     logout(request)
     return redirect('login_page')
